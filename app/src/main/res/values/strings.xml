@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Spec</string>
+    <string name="alignment">Alignment</string>
+    <string name="objects">Objects</string>
+    <string name="deep_sky">DeepSky</string>
+    <string name="stars">Stars</string>
+    <string name="messier">M</string>
+    <string name="ngc">NGC</string>\
+    <string name="ic">IC</string>
+    <string name="enter_the_number_of_object">Enter the number of object</string>
+    <string name="m">M</string>
+    <string name="favorite">favorite</string>
+    <string name="magnitude"> Magnitude:  </string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="goto_string">GoTo</string>
+    <string name="info">Info</string>
+    <string name="cancel">Cancel</string>
+
+
+    <string-array name="catalogs">
+        <item>Messier</item>
+        <item>NGC</item>
+        <item>IC</item>
+    </string-array>
+
+</resources>
