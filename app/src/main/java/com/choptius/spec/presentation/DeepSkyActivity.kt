@@ -50,7 +50,7 @@ class DeepSkyActivity : AppCompatActivity() {
         adapter = AstroAdapter(
             this, database.getDeepSkyObjects(
                 catalogsArray[b.catalogsSpinner.selectedItemPosition], ""
-            )
+            ), AstroDatabase.getInstance(this)
         )
         b.objectsList.adapter = adapter
 

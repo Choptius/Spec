@@ -4,13 +4,14 @@ import android.content.Context
 import android.database.Cursor
 import android.util.Log
 import com.choptius.spec.data.AstroDatabaseHelper
+import com.choptius.spec.domain.AstroRepository
 import com.choptius.spec.domain.Star
 import com.choptius.spec.domain.AstronomicalObject
 import com.choptius.spec.domain.DeepSkyObject
 import java.lang.Exception
 import java.util.ArrayList
 
-class AstroDatabase private constructor(context: Context) {
+class AstroDatabase private constructor(context: Context): AstroRepository {
 
     private val helper: AstroDatabaseHelper =
         AstroDatabaseHelper(context)
@@ -60,8 +61,8 @@ class AstroDatabase private constructor(context: Context) {
     }
 
 
-    val favorites: List<AstronomicalObject>
-        get() {
+    override fun getFavorites(): List<AstronomicalObject> {
+
             val favorites: MutableList<AstronomicalObject> = ArrayList()
 
             val query = "SELECT * FROM $DEEP_SKY_TABLE WHERE $IS_IN_FAVORITES_COLUMN = 1"
@@ -78,7 +79,7 @@ class AstroDatabase private constructor(context: Context) {
             return favorites
         }
 
-    fun getStars(catalog: CharSequence, number: CharSequence): List<Star> {
+    override fun getStars(catalog: CharSequence, number: CharSequence): List<Star> {
 
         val catalogNameidColumn = starCatalogs[catalog.toString()]
         val stars: MutableList<Star> = ArrayList()
@@ -98,7 +99,7 @@ class AstroDatabase private constructor(context: Context) {
         return stars
     }
 
-    fun getStarsByFlamsteed(flamsteed: Int, constellation: AstronomicalObject.Constellation): List<Star> {
+    override fun getStarsByFlamsteed(flamsteed: Int, constellation: AstronomicalObject.Constellation): List<Star> {
 
         val stars: MutableList<Star> = ArrayList()
 
@@ -119,7 +120,7 @@ class AstroDatabase private constructor(context: Context) {
         return stars
     }
 
-    fun getDeepSkyObjects(catalog: CharSequence, number: CharSequence): List<DeepSkyObject> {
+    override fun getDeepSkyObjects(catalog: CharSequence, number: CharSequence): List<DeepSkyObject> {
 
         val list: MutableList<DeepSkyObject> = ArrayList()
 
@@ -141,7 +142,7 @@ class AstroDatabase private constructor(context: Context) {
         return list
     }
 
-    fun setIsInFavorites(astronomicalObject: AstronomicalObject, addOrDelete: Boolean) {
+    override fun setIsInFavorites(astronomicalObject: AstronomicalObject, addOrDelete: Boolean) {
 
         val toAddOrToDelete = if (addOrDelete) 1 else 0
 
