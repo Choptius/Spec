@@ -12,13 +12,18 @@ import com.choptius.spec.domain.AstroAdapter.AstroHolder
 import com.choptius.spec.databinding.ObjectRowItemBinding
 import com.choptius.spec.db.AstroDatabase
 
-class AstroAdapter(private val context: Context) : RecyclerView.Adapter<AstroHolder>(),
-    View.OnClickListener{
+class AstroAdapter(
+    private val context: Context,
+    private val repository: AstroRepository
+) : RecyclerView.Adapter<AstroHolder>(), View.OnClickListener {
 
     private var list: List<AstronomicalObject> = emptyList()
-    private val database: AstroDatabase = AstroDatabase.getInstance(context)
 
-    constructor(context: Context, list: List<AstronomicalObject>) : this(context) {
+    constructor(
+        context: Context,
+        list: List<AstronomicalObject>,
+        repository: AstroRepository
+    ) : this(context, repository) {
         this.list = list
     }
 
@@ -49,11 +54,14 @@ class AstroAdapter(private val context: Context) : RecyclerView.Adapter<AstroHol
             val checkBox = v as ToggleButton
             val isChecked = checkBox.isChecked
             astronomicalObject.isInFavorites = isChecked
-            Thread { database.setIsInFavorites(astronomicalObject, isChecked) }.start()
+            Thread { repository.setIsInFavorites(astronomicalObject, isChecked) }.start()
 
         } else {
             if (astronomicalObject is DeepSkyObject) {
-                Log.e(TAG, "${astronomicalObject.type.fullName} ${astronomicalObject.type.imageResource}")
+                Log.e(
+                    TAG,
+                    "${astronomicalObject.type.fullName} ${astronomicalObject.type.imageResource}"
+                )
             }
 
         }
@@ -63,8 +71,10 @@ class AstroAdapter(private val context: Context) : RecyclerView.Adapter<AstroHol
     inner class AstroHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val b = ObjectRowItemBinding.inflate(LayoutInflater.from(context))
-        private val addToFavoritesCheckBox = itemView.findViewById<ToggleButton>(R.id.addToFavoritesCheckBox)
-        private val positionInfoTextView = itemView.findViewById<TextView>(R.id.positionInfoTextView)
+        private val addToFavoritesCheckBox =
+            itemView.findViewById<ToggleButton>(R.id.addToFavoritesCheckBox)
+        private val positionInfoTextView =
+            itemView.findViewById<TextView>(R.id.positionInfoTextView)
         private val listImageView = itemView.findViewById<ImageView>(R.id.listImageView)
         private val objectNameTextView = itemView.findViewById<TextView>(R.id.objectNameTextView)
         private val magnitudeTextView = itemView.findViewById<TextView>(R.id.magnitudeTextView)
@@ -98,7 +108,7 @@ class AstroAdapter(private val context: Context) : RecyclerView.Adapter<AstroHol
                     listImageView.setImageResource(R.drawable.stars)
                 }
 
-            } else if (astronomicalObject is DeepSkyObject){
+            } else if (astronomicalObject is DeepSkyObject) {
 
                 listImageView.setImageResource(astronomicalObject.type.imageResource)
 
