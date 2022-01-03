@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/red"
             android:inputType="numberDecimal"
+            android:textColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.854"
