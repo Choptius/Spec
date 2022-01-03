@@ -1,4 +1,4 @@
-package com.choptius.spec
+package com.choptius.spec.presentation
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.choptius.spec.R
-import com.choptius.spec.adapters.AstroAdapter
+import com.choptius.spec.domain.AstroAdapter
 import com.choptius.spec.databinding.ActivityDeepskyBinding
 import com.choptius.spec.db.AstroDatabase
 

@@ -1,4 +1,4 @@
-package com.choptius.spec.astro
+package com.choptius.spec.domain
 
 
 data class Star(

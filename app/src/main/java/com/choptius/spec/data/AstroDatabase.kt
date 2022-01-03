@@ -3,16 +3,17 @@ package com.choptius.spec.db
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
-import com.choptius.spec.AstroDatabaseHelper
-import com.choptius.spec.astro.Star
-import com.choptius.spec.astro.AstronomicalObject
-import com.choptius.spec.DeepSkyObject
+import com.choptius.spec.data.AstroDatabaseHelper
+import com.choptius.spec.domain.Star
+import com.choptius.spec.domain.AstronomicalObject
+import com.choptius.spec.domain.DeepSkyObject
 import java.lang.Exception
 import java.util.ArrayList
 
 class AstroDatabase private constructor(context: Context) {
 
-    private val helper: AstroDatabaseHelper = AstroDatabaseHelper(context)
+    private val helper: AstroDatabaseHelper =
+        AstroDatabaseHelper(context)
 
 
     companion object {

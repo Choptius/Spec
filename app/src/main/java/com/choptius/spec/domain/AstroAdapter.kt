@@ -1,4 +1,4 @@
-package com.choptius.spec.adapters
+package com.choptius.spec.domain
 
 import android.content.Context
 import android.util.Log
@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.choptius.spec.R
-import com.choptius.spec.adapters.AstroAdapter.AstroHolder
-import com.choptius.spec.astro.AstronomicalObject
-import com.choptius.spec.DeepSkyObject
-import com.choptius.spec.astro.Star
+import com.choptius.spec.domain.AstroAdapter.AstroHolder
 import com.choptius.spec.databinding.ObjectRowItemBinding
 import com.choptius.spec.db.AstroDatabase
 

@@ -1,4 +1,4 @@
-package com.choptius.spec;
+package com.choptius.spec.data;
 
 import android.content.Context;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;

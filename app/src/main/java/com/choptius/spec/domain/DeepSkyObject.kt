@@ -1,6 +1,6 @@
-package com.choptius.spec
+package com.choptius.spec.domain
 
-import com.choptius.spec.astro.AstronomicalObject
+import com.choptius.spec.R
 
 data class DeepSkyObject(
     override val declination: Double,
