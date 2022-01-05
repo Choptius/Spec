@@ -1,4 +1,4 @@
-package com.choptius.spec.presentation
+package com.choptius.spec.presentation.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

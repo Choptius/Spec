@@ -1,4 +1,4 @@
-package com.choptius.spec.domain
+package com.choptius.spec.presentation.adapter
 
 import android.content.Context
 import android.util.Log
@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.choptius.spec.R
-import com.choptius.spec.domain.AstroAdapter.AstroHolder
-import com.choptius.spec.databinding.ObjectRowItemBinding
-import com.choptius.spec.db.AstroDatabase
+import com.choptius.spec.presentation.adapter.AstroAdapter.AstroHolder
+import com.choptius.spec.domain.AstroRepository
+import com.choptius.spec.domain.entities.AstronomicalObject
+import com.choptius.spec.domain.entities.DeepSkyObject
+import com.choptius.spec.domain.entities.Star
 
 class AstroAdapter(
     private val context: Context,
@@ -70,7 +72,6 @@ class AstroAdapter(
 
     inner class AstroHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val b = ObjectRowItemBinding.inflate(LayoutInflater.from(context))
         private val addToFavoritesCheckBox =
             itemView.findViewById<ToggleButton>(R.id.addToFavoritesCheckBox)
         private val positionInfoTextView =

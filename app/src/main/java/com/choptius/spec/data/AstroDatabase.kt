@@ -5,9 +5,9 @@ import android.database.Cursor
 import android.util.Log
 import com.choptius.spec.data.AstroDatabaseHelper
 import com.choptius.spec.domain.AstroRepository
-import com.choptius.spec.domain.Star
-import com.choptius.spec.domain.AstronomicalObject
-import com.choptius.spec.domain.DeepSkyObject
+import com.choptius.spec.domain.entities.Star
+import com.choptius.spec.domain.entities.AstronomicalObject
+import com.choptius.spec.domain.entities.DeepSkyObject
 import java.lang.Exception
 import java.util.ArrayList
 
@@ -33,7 +33,6 @@ class AstroDatabase private constructor(context: Context): AstroRepository {
         }
 
         const val TAG = "AstroDatabase"
-
         const val MESSAGE = "Failed: "
         const val DEEP_SKY_TABLE = "dso"
         const val STARS_TABLE = "hygdata"

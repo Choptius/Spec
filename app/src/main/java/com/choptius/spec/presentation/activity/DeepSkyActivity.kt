@@ -1,4 +1,4 @@
-package com.choptius.spec.presentation
+package com.choptius.spec.presentation.activity
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,11 +8,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.choptius.spec.R
-import com.choptius.spec.domain.AstroAdapter
 import com.choptius.spec.databinding.ActivityDeepskyBinding
 import com.choptius.spec.db.AstroDatabase
+import com.choptius.spec.presentation.adapter.AstroAdapter
+import com.choptius.spec.presentation.viewmodel.DeepSkyViewModel
 
 class DeepSkyActivity : AppCompatActivity() {
 
@@ -20,6 +22,7 @@ class DeepSkyActivity : AppCompatActivity() {
     private lateinit var database: AstroDatabase
     private lateinit var adapter: AstroAdapter
     private lateinit var b: ActivityDeepskyBinding
+    private lateinit var viewModel: DeepSkyViewModel
 
     private val catalogsArray = arrayOf("M", "NGC", "IC")
 
@@ -47,6 +50,7 @@ class DeepSkyActivity : AppCompatActivity() {
 
         b.objectsList.layoutManager = LinearLayoutManager(this)
         b.objectsList.scrollToPosition(0)
+
         adapter = AstroAdapter(
             this, database.getDeepSkyObjects(
                 catalogsArray[b.catalogsSpinner.selectedItemPosition], ""
@@ -69,10 +73,6 @@ class DeepSkyActivity : AppCompatActivity() {
     private fun updateRecyclerView() {
         val catalog = catalogsArray[b.catalogsSpinner.selectedItemPosition]
         val number: CharSequence = b.enterNumber.text
-
-        when(catalog) {
-            "dkjvh","dkjfhk" -> TODO()
-        }
 
         Thread {
             val list = database.getDeepSkyObjects(catalog, number)

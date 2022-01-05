@@ -11,16 +11,16 @@
         android:theme="@style/Theme.Spec">
 
         <activity
-            android:name=".presentation.StarsActivity"
+            android:name=".presentation.activity.StarsActivity"
             android:exported="true" />
 
         <activity
-            android:name=".presentation.DeepSkyActivity"
+            android:name=".presentation.activity.DeepSkyActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
