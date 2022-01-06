@@ -23,7 +23,7 @@ class AstroAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AstroHolder {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.object_row_item, parent, false)
+        val view = inflater.inflate(R.layout.object_item, parent, false)
         return AstroHolder(view)
     }
 
