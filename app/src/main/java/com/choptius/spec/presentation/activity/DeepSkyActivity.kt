@@ -1,25 +1,26 @@
-package com.choptius.spec.presentation
+package com.choptius.spec.presentation.activity
 
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.choptius.spec.R
-import com.choptius.spec.domain.AstroAdapter
 import com.choptius.spec.databinding.ActivityDeepskyBinding
 import com.choptius.spec.db.AstroDatabase
+import com.choptius.spec.presentation.adapter.AstroAdapter
+import com.choptius.spec.presentation.viewmodel.DeepSkyViewModel
 
 class DeepSkyActivity : AppCompatActivity() {
-
 
     private lateinit var database: AstroDatabase
     private lateinit var adapter: AstroAdapter
     private lateinit var b: ActivityDeepskyBinding
+    private lateinit var viewModel: DeepSkyViewModel
 
     private val catalogsArray = arrayOf("M", "NGC", "IC")
 
@@ -29,11 +30,12 @@ class DeepSkyActivity : AppCompatActivity() {
         setContentView(b.root)
 
         database = AstroDatabase.getInstance(this)
+        viewModel = ViewModelProvider(this).get(DeepSkyViewModel::class.java)
 
-        val arrayAdapter =
-            ArrayAdapter.createFromResource(this, R.array.catalogs, R.layout.spinner_item)
-        arrayAdapter.setDropDownViewResource(R.layout.dropdown_spinner_item)
-        b.catalogsSpinner.adapter = arrayAdapter
+        b.catalogsSpinner.adapter =
+            ArrayAdapter.createFromResource(this, R.array.catalogs, R.layout.spinner_item).apply {
+                this.setDropDownViewResource(R.layout.dropdown_spinner_item)
+            }
 
         b.catalogsSpinner.onItemSelectedListener =
 
@@ -45,14 +47,19 @@ class DeepSkyActivity : AppCompatActivity() {
             }
 
 
-        b.objectsList.layoutManager = LinearLayoutManager(this)
-        b.objectsList.scrollToPosition(0)
-        adapter = AstroAdapter(
-            this, database.getDeepSkyObjects(
-                catalogsArray[b.catalogsSpinner.selectedItemPosition], ""
-            ), AstroDatabase.getInstance(this)
-        )
+        adapter = AstroAdapter(this) { obj, isChecked ->
+            if (isChecked) {
+                viewModel.addToFavorites(obj)
+            } else {
+                viewModel.deleteFromFavorites(obj)
+            }
+        }
         b.objectsList.adapter = adapter
+
+        viewModel.deepSkyObjectsList.observe(this) {
+            adapter.setList(it)
+            b.objectsList.scrollToPosition(0)
+        }
 
         b.enterNumber.addTextChangedListener(object : TextWatcher {
 
@@ -70,16 +77,7 @@ class DeepSkyActivity : AppCompatActivity() {
         val catalog = catalogsArray[b.catalogsSpinner.selectedItemPosition]
         val number: CharSequence = b.enterNumber.text
 
-        when(catalog) {
-            "dkjvh","dkjfhk" -> TODO()
-        }
+        viewModel.getDeepSkyObjects(catalog, number)
 
-        Thread {
-            val list = database.getDeepSkyObjects(catalog, number)
-            Handler(mainLooper).post {
-                adapter.setList(list)
-                b.objectsList.scrollToPosition(0)
-            }
-        }.start()
     }
 }

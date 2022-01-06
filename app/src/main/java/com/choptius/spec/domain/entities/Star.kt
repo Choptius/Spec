@@ -1,4 +1,4 @@
-package com.choptius.spec.domain
+package com.choptius.spec.domain.entities
 
 
 data class Star(

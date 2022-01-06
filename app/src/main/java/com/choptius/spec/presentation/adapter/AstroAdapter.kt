@@ -1,4 +1,4 @@
-package com.choptius.spec.domain
+package com.choptius.spec.presentation.adapter
 
 import android.content.Context
 import android.util.Log
@@ -8,24 +8,18 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.choptius.spec.R
-import com.choptius.spec.domain.AstroAdapter.AstroHolder
-import com.choptius.spec.databinding.ObjectRowItemBinding
-import com.choptius.spec.db.AstroDatabase
+import com.choptius.spec.presentation.adapter.AstroAdapter.AstroHolder
+import com.choptius.spec.domain.entities.AstronomicalObject
+import com.choptius.spec.domain.entities.DeepSkyObject
+import com.choptius.spec.domain.entities.Star
 
 class AstroAdapter(
     private val context: Context,
-    private val repository: AstroRepository
+    private val onFavoritesButtonClickCallback: (obj: AstronomicalObject, isChecked: Boolean) -> Unit
 ) : RecyclerView.Adapter<AstroHolder>(), View.OnClickListener {
 
     private var list: List<AstronomicalObject> = emptyList()
 
-    constructor(
-        context: Context,
-        list: List<AstronomicalObject>,
-        repository: AstroRepository
-    ) : this(context, repository) {
-        this.list = list
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AstroHolder {
         val inflater = LayoutInflater.from(context)
@@ -46,15 +40,14 @@ class AstroAdapter(
         notifyDataSetChanged()
     }
 
-    //обрабатывает нажатия с itemView
+    //обрабатывает нажатия с itemView(с favoritesCheckBox в том числе)
     override fun onClick(v: View) {
         val astronomicalObject = v.tag as AstronomicalObject
 
         if (v.id == R.id.addToFavoritesCheckBox) {
-            val checkBox = v as ToggleButton
-            val isChecked = checkBox.isChecked
-            astronomicalObject.isInFavorites = isChecked
-            Thread { repository.setIsInFavorites(astronomicalObject, isChecked) }.start()
+            val toggleButton = v.findViewById<ToggleButton>(R.id.addToFavoritesCheckBox)
+            astronomicalObject.isInFavorites = toggleButton.isChecked
+            onFavoritesButtonClickCallback(astronomicalObject, toggleButton.isChecked)
 
         } else {
             if (astronomicalObject is DeepSkyObject) {
@@ -70,7 +63,6 @@ class AstroAdapter(
 
     inner class AstroHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val b = ObjectRowItemBinding.inflate(LayoutInflater.from(context))
         private val addToFavoritesCheckBox =
             itemView.findViewById<ToggleButton>(R.id.addToFavoritesCheckBox)
         private val positionInfoTextView =
