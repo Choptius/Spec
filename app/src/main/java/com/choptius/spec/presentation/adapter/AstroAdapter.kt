@@ -13,16 +13,13 @@ import com.choptius.spec.domain.entities.AstronomicalObject
 import com.choptius.spec.domain.entities.DeepSkyObject
 import com.choptius.spec.domain.entities.Star
 
-class AstroAdapter(
-    private val context: Context,
-    private val onFavoritesButtonClickCallback: (obj: AstronomicalObject, isChecked: Boolean) -> Unit
-) : RecyclerView.Adapter<AstroHolder>(), View.OnClickListener {
+class AstroAdapter : RecyclerView.Adapter<AstroHolder>(), View.OnClickListener {
 
     private var list: List<AstronomicalObject> = emptyList()
-
+    var onFavoritesButtonClickListener: ((obj: AstronomicalObject, isChecked: Boolean) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AstroHolder {
-        val inflater = LayoutInflater.from(context)
+        val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.object_item, parent, false)
         return AstroHolder(view)
     }
@@ -47,15 +44,7 @@ class AstroAdapter(
         if (v.id == R.id.addToFavoritesCheckBox) {
             val toggleButton = v.findViewById<ToggleButton>(R.id.addToFavoritesCheckBox)
             astronomicalObject.isInFavorites = toggleButton.isChecked
-            onFavoritesButtonClickCallback(astronomicalObject, toggleButton.isChecked)
-
-        } else {
-            if (astronomicalObject is DeepSkyObject) {
-                Log.e(
-                    TAG,
-                    "${astronomicalObject.type.fullName} ${astronomicalObject.type.imageResource}"
-                )
-            }
+            onFavoritesButtonClickListener?.invoke(astronomicalObject, toggleButton.isChecked)
 
         }
     }

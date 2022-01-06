@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.choptius.spec.R
 import com.choptius.spec.databinding.ActivityDeepskyBinding
 import com.choptius.spec.db.AstroDatabase
@@ -47,13 +46,16 @@ class DeepSkyActivity : AppCompatActivity() {
             }
 
 
-        adapter = AstroAdapter(this) { obj, isChecked ->
+        adapter = AstroAdapter()
+        adapter.onFavoritesButtonClickListener = { obj, isChecked ->
+
             if (isChecked) {
                 viewModel.addToFavorites(obj)
             } else {
                 viewModel.deleteFromFavorites(obj)
             }
         }
+
         b.objectsList.adapter = adapter
 
         viewModel.deepSkyObjectsList.observe(this) {
