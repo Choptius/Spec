@@ -11,4 +11,5 @@
     <color name="yellow">#FFC107</color>
     <color name="pseudo_black">#141414</color>
     <color name="grey">#646464</color>
+    <color name="dark_grey">#323232</color>
 </resources>
