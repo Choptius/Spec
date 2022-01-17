@@ -16,13 +16,22 @@ class DeepSkyViewModel(application: Application) : AndroidViewModel(application)
     private val favoritesUseCase = FavoritesUseCase(AstroDatabase.getInstance(application))
     private val getDeepSkyObjectsUseCase = GetDeepSkyObjectsUseCase(AstroDatabase.getInstance(application))
 
-    fun addToFavorites(obj: AstronomicalObject) = favoritesUseCase.addToFavorites(obj)
+    fun addToFavorites(obj: AstronomicalObject) {
+        Thread{
+            favoritesUseCase.addToFavorites(obj)
+        }.start()
+    }
 
-    fun deleteFromFavorites(obj: AstronomicalObject) = favoritesUseCase.deleteFromFavorites(obj)
+    fun deleteFromFavorites(obj: AstronomicalObject) {
+        Thread {
+            favoritesUseCase.deleteFromFavorites(obj)
+        }.start()
+    }
 
     fun getDeepSkyObjects(catalog: CharSequence, number: CharSequence) {
-        deepSkyObjectsList.value = getDeepSkyObjectsUseCase.getDeepSkyObjects(catalog, number)
-
+        Thread {
+            deepSkyObjectsList.postValue(getDeepSkyObjectsUseCase.getDeepSkyObjects(catalog, number))
+        }.start()
     }
 
 

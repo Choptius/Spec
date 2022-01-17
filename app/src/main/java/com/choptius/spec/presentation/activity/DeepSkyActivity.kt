@@ -3,6 +3,7 @@ package com.choptius.spec.presentation.activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.choptius.spec.R
 import com.choptius.spec.databinding.ActivityDeepskyBinding
 import com.choptius.spec.db.AstroDatabase
+import com.choptius.spec.domain.entities.AstronomicalObject
 import com.choptius.spec.presentation.adapter.AstroAdapter
 import com.choptius.spec.presentation.viewmodel.DeepSkyViewModel
 
@@ -59,7 +61,7 @@ class DeepSkyActivity : AppCompatActivity() {
         b.objectsList.adapter = adapter
 
         viewModel.deepSkyObjectsList.observe(this) {
-            adapter.setList(it)
+            adapter.list = it
             b.objectsList.scrollToPosition(0)
         }
 
@@ -78,7 +80,7 @@ class DeepSkyActivity : AppCompatActivity() {
     private fun updateRecyclerView() {
         val catalog = catalogsArray[b.catalogsSpinner.selectedItemPosition]
         val number: CharSequence = b.enterNumber.text
-
+        Log.e("UpdateRecyclerView", "$catalog $number")
         viewModel.getDeepSkyObjects(catalog, number)
 
     }
