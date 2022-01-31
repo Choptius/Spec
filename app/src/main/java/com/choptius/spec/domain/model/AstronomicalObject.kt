@@ -1,17 +1,17 @@
-package com.choptius.spec.domain.entities
-
-import java.io.Serializable
+package com.choptius.spec.domain.model
 
 abstract class AstronomicalObject(
     open val declination: Double,
     open val rightAscension: Double,
     open val constellation: Constellation,
-    open val magnitude: Double,
+    open val magnitude: Double = UNDEFINED_MAGNITUDE,
     open val commonName: CharSequence,
     open var isInFavorites: Boolean,
-) : Serializable {
+)   {
 
-    fun goTo() {}
+    companion object {
+        const val UNDEFINED_MAGNITUDE = -1488.0
+    }
 
     enum class Constellation(val fullName: String) {
         And("Andromeda"), Ant("Antlia"), Aps("Apus"), Aqr("Aquarius"), Aql("Aquila"), Ara("Ara"), Ari(
@@ -50,13 +50,13 @@ abstract class AstronomicalObject(
         Ser("Serpens"), Sex("Sextans"), Tau("Taurus"), Tel("Telescopium"), Tri("Triangulum"), TrA("Triangulum Australe"), Tuc(
             "Tucana"
         ),
-        UMa("Ursa Major"), UMi("Ursa Minor"), Vel("Vela"), Vir("Virgo"), Vol("Volans"), Vul("Vulpecula"), NC(
-            ""
-        );
+        UMa("Ursa Major"), UMi("Ursa Minor"), Vel("Vela"), Vir("Virgo"), Vol("Volans"), Vul("Vulpecula"),
+        NC("");
 
         companion object {
+
             fun fromString(str: CharSequence): Constellation {
-                if (!str.toString().isEmpty()) {
+                if (str.toString().isNotEmpty()) {
                     for (constellation in values()) {
                         if (constellation.name == str) return constellation
                     }

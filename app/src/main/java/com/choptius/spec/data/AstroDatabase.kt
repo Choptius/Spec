@@ -4,10 +4,10 @@ import android.content.Context
 import android.database.Cursor
 import android.util.Log
 import com.choptius.spec.data.AstroDatabaseHelper
-import com.choptius.spec.domain.AstroRepository
-import com.choptius.spec.domain.entities.Star
-import com.choptius.spec.domain.entities.AstronomicalObject
-import com.choptius.spec.domain.entities.DeepSkyObject
+import com.choptius.spec.domain.repository.AstroRepository
+import com.choptius.spec.domain.model.Star
+import com.choptius.spec.domain.model.AstronomicalObject
+import com.choptius.spec.domain.model.DeepSkyObject
 import java.lang.Exception
 import java.util.ArrayList
 

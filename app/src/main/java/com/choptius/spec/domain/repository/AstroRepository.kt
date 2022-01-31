@@ -1,8 +1,8 @@
-package com.choptius.spec.domain
+package com.choptius.spec.domain.repository
 
-import com.choptius.spec.domain.entities.AstronomicalObject
-import com.choptius.spec.domain.entities.DeepSkyObject
-import com.choptius.spec.domain.entities.Star
+import com.choptius.spec.domain.model.AstronomicalObject
+import com.choptius.spec.domain.model.DeepSkyObject
+import com.choptius.spec.domain.model.Star
 
 interface AstroRepository {
 
