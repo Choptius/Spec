@@ -1,19 +1,16 @@
 package com.choptius.spec.presentation.adapter
 
-import android.content.Context
 import android.util.Log
-import android.util.LogPrinter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.choptius.spec.R
 import com.choptius.spec.presentation.adapter.AstroAdapter.AstroHolder
-import com.choptius.spec.domain.entities.AstronomicalObject
-import com.choptius.spec.domain.entities.DeepSkyObject
-import com.choptius.spec.domain.entities.Star
+import com.choptius.spec.domain.model.AstronomicalObject
+import com.choptius.spec.domain.model.DeepSkyObject
+import com.choptius.spec.domain.model.Star
 
 class AstroAdapter : RecyclerView.Adapter<AstroHolder>() {
 

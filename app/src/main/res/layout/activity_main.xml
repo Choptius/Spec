@@ -1,110 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".presentation.activity.MainActivity" >
+    tools:context=".presentation.activity.MainActivity">
 
-    <ImageButton
-        android:id="@+id/toAlignmentButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="8dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/objects"
-        android:orientation="vertical"
-        android:onClick="onNavigationClick"
-        app:layout_constraintBottom_toTopOf="@+id/alignmentTextView"
-        app:layout_constraintEnd_toStartOf="@+id/toDeepSkyButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_telescope"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.choptius.spec.presentation.fragment.SearchFragment"
+        tools:layout="@layout/deepsky_fragment" />
 
-    <ImageButton
-        android:id="@+id/toDeepSkyButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="1dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/alignment"
-        android:onClick="onNavigationClick"
-        app:layout_constraintBottom_toTopOf="@+id/deepSkyTextView"
-        app:layout_constraintEnd_toStartOf="@+id/toStarsButton"
-        app:layout_constraintStart_toEndOf="@+id/toAlignmentButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_galaxy"
-        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
-    <TextView
-        android:id="@+id/alignmentTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:fontFamily="casual"
-        android:minHeight="48dp"
-        android:onClick="onNavigationClick"
-        android:text="@string/alignment"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/toAlignmentButton"
-        app:layout_constraintStart_toStartOf="@+id/toAlignmentButton"
-        app:layout_constraintTop_toBottomOf="@+id/toAlignmentButton"
-        tools:visibility="visible"
-        android:focusable="true" />
-
-    <TextView
-        android:id="@+id/deepSkyTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:fontFamily="casual"
-        android:minHeight="48dp"
-        android:onClick="onNavigationClick"
-        android:text="@string/deep_sky"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/toDeepSkyButton"
-        app:layout_constraintStart_toStartOf="@+id/toDeepSkyButton"
-        app:layout_constraintTop_toBottomOf="@+id/toDeepSkyButton"
-        android:focusable="true" />
-
-    <ImageButton
-        android:id="@+id/toStarsButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="24dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/stars"
-        android:onClick="onNavigationClick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/toDeepSkyButton"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/stars"
-        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
-
-    <TextView
-        android:id="@+id/starsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:fontFamily="casual"
-        android:minHeight="48dp"
-        android:text="@string/stars"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/toStarsButton"
-        app:layout_constraintStart_toStartOf="@+id/toStarsButton"
-        app:layout_constraintTop_toBottomOf="@+id/toStarsButton"
-        android:focusable="true" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

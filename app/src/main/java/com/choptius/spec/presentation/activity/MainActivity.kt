@@ -11,10 +11,4 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-
-    fun onNavigationClick(view: View) {
-        when(view.id) {
-            R.id.toDeepSkyButton -> startActivity(Intent(this, DeepSkyActivity::class.java))
-        }
-    }
 }

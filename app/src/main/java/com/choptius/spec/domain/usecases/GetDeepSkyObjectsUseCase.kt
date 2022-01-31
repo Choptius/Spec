@@ -1,7 +1,6 @@
 package com.choptius.spec.domain.usecases
 
-import com.choptius.spec.domain.AstroRepository
-import com.choptius.spec.domain.entities.AstronomicalObject
+import com.choptius.spec.domain.repository.AstroRepository
 
 class GetDeepSkyObjectsUseCase(private val repository: AstroRepository) {
 

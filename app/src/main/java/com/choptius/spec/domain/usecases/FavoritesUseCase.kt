@@ -1,7 +1,7 @@
 package com.choptius.spec.domain.usecases
 
-import com.choptius.spec.domain.AstroRepository
-import com.choptius.spec.domain.entities.AstronomicalObject
+import com.choptius.spec.domain.repository.AstroRepository
+import com.choptius.spec.domain.model.AstronomicalObject
 
 class FavoritesUseCase(private val repository: AstroRepository) {
 

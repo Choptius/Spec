@@ -1,7 +1,7 @@
 package com.choptius.spec.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.choptius.spec.domain.entities.AstronomicalObject
+import com.choptius.spec.domain.model.AstronomicalObject
 
 class AstronomicalObjectDiffCallBack : DiffUtil.ItemCallback<AstronomicalObject>() {
 

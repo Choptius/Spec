@@ -1,4 +1,4 @@
-package com.choptius.spec.domain.entities
+package com.choptius.spec.domain.model
 
 import com.choptius.spec.R
 
