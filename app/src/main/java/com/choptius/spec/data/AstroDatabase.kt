@@ -10,6 +10,9 @@ import com.choptius.spec.domain.model.AstronomicalObject
 import com.choptius.spec.domain.model.DeepSkyObject
 import java.lang.Exception
 import java.util.ArrayList
+/*  Этот класс был написан давно, поэтому он использует Sqlite напрямую, вместо библиотеки Room
+* Также он использует уже заполненную базу, лежащую в assets, что добавило дополнительных сложностей
+* Поэтому я решил пока не переписывать все на Room, хотя на самом деле давно бы пора */
 
 class AstroDatabase private constructor(context: Context): AstroRepository {
 
